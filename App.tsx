@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ProjectCard } from './components/ProjectCard';
 import { BIO, FILMOGRAPHY, PROJECTS } from './constants';
 import { Menu, X, ArrowRight, ArrowDown, Instagram, Linkedin, Mail, Facebook, Film } from 'lucide-react';
@@ -413,26 +413,6 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 50s linear infinite;
-        }
-        .vertical-text {
-          writing-mode: vertical-rl;
-          text-orientation: mixed;
-        }
-        html {
-          scroll-behavior: smooth;
-        }
-        ::selection {
-          background: #f59e0b;
-          color: black;
-        }
-      `}</style>
     </div>
   );
 };
