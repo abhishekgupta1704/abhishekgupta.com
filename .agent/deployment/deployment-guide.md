@@ -65,7 +65,7 @@ In Cloudflare Dashboard:
 5. Save and deploy
 
 Default deployment URL:
-- `https://abhishekgupta.pages.dev`
+- `https://abhishekg.pages.dev`
 
 ## Notes
 

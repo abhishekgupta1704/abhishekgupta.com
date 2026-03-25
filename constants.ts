@@ -125,9 +125,7 @@ export const FILMOGRAPHY: FilmographyGroup[] = [
       { title: 'First Act', year: '2023-2024', format: 'TV Series', credit: 'Editor', episodes: '2 episodes', note: 'Includes "Papa Kehte Hain"' },
       { title: 'Love Storiyaan', year: '2024', format: 'TV Series', credit: 'Associate Editor', episodes: '1 episode' },
       { title: 'Jubilee', year: '2023', format: 'TV Series', credit: 'Additional First Assistant Editor', episodes: '10 episodes' },
-      { title: 'Sacred Games', year: '2018-2019', format: 'TV Series', credit: 'Assistant Editor', episodes: '16 episodes' },
-      { title: 'Smoke', year: '2018', format: 'TV Series', credit: 'Assistant Editor', episodes: '2 episodes' },
-      { title: 'Bard of Blood', year: '2019', format: 'TV Series', credit: 'Editorial Department', episodes: '7 episodes' }
+      { title: 'Sacred Games', year: '2018-2019', format: 'TV Series', credit: 'Assistant Editor', episodes: '16 episodes' }
     ]
   },
   {
