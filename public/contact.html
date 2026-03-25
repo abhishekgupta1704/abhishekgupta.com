@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Abhishek Gupta</title>
+    <meta
+      name="description"
+      content="Send a collaboration inquiry to film editor and filmmaker Abhishek Gupta."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://abhishekgupta.com/contact.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Inter', sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(245, 158, 11, 0.18), transparent 32%),
+          linear-gradient(160deg, #050505 0%, #0a0a0a 55%, #111827 100%);
+        color: #f5f5f5;
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 20px;
+      }
+
+      .panel {
+        width: min(100%, 720px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(12, 12, 12, 0.88);
+        backdrop-filter: blur(14px);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        font-size: 10px;
+        letter-spacing: 0.45em;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: #f59e0b;
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.6rem, 7vw, 4.4rem);
+        line-height: 0.95;
+      }
+
+      .intro {
+        margin: 0 0 28px;
+        color: rgba(245, 245, 245, 0.68);
+        line-height: 1.7;
+        max-width: 56ch;
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      label {
+        display: grid;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(245, 245, 245, 0.72);
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+        padding: 16px 18px;
+        font: inherit;
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: rgba(245, 158, 11, 0.7);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      textarea {
+        min-height: 180px;
+        resize: vertical;
+      }
+
+      .honeypot {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+      }
+
+      .note {
+        color: rgba(245, 245, 245, 0.56);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      button,
+      .back-link {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        padding: 15px 22px;
+        font: inherit;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      button {
+        background: #fff;
+        color: #000;
+      }
+
+      button:hover,
+      .back-link:hover {
+        transform: translateY(-1px);
+      }
+
+      .back-link {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(245, 245, 245, 0.82);
+        background: rgba(255, 255, 255, 0.04);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel" aria-labelledby="contact-title">
+        <p class="eyebrow">Private Contact</p>
+        <h1 id="contact-title">Start Collaboration</h1>
+        <p class="intro">
+          Use this page to send a direct inquiry to Abhishek Gupta. Include your name, your email address, and a clear message about the project or collaboration.
+        </p>
+
+        <form action="/api/contact" method="post">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required maxlength="120" />
+          </label>
+
+          <label>
+            Email Address
+            <input type="email" name="email" autocomplete="email" required maxlength="180" />
+          </label>
+
+          <label>
+            Subject
+            <input type="text" name="subject" autocomplete="subject" maxlength="120" />
+          </label>
+
+          <label>
+            Message
+            <textarea name="message" required maxlength="5000"></textarea>
+          </label>
+
+          <div class="honeypot" aria-hidden="true">
+            <label>
+              Company
+              <input type="text" name="company" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+
+          <div class="actions">
+            <span class="note">This submits securely through the site backend and routes the message to `abhishekgupta1704@gmail.com`.</span>
+            <button type="submit">Send</button>
+          </div>
+        </form>
+
+        <div class="actions" style="margin-top: 26px;">
+          <a class="back-link" href="/">Back to Portfolio</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

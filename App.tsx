@@ -105,7 +105,7 @@ const App: React.FC = () => {
               </a>
             ))}
             <a 
-              href="mailto:abhishekgupta1704@gmail.com" 
+              href="/contact.html"
               className="text-[10px] uppercase tracking-[0.3em] font-bold bg-white text-black px-6 py-3 hover:bg-amber-400 transition-all duration-300 rounded-sm"
             >
               Start Collaboration
@@ -373,7 +373,7 @@ const App: React.FC = () => {
           <div className="text-center mb-40">
             <span className="text-amber-500 text-[10px] uppercase tracking-[0.8em] font-black mb-12 block">Collaborations & Inquiries</span>
             <a 
-              href="mailto:abhishekgupta1704@gmail.com" 
+              href="/contact.html"
               className="text-lg md:text-2xl uppercase tracking-[0.3em] font-bold bg-white text-black px-12 py-6 hover:bg-amber-400 transition-all duration-300 rounded-sm inline-block"
             >
               Start Collaboration
