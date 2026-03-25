@@ -20,7 +20,7 @@ This project is a Vite app, so Cloudflare Pages can build it directly from GitHu
 ## GitHub repository
 
 Target repository:
-- `https://github.com/abhishekgupta1704-code/abhishekgupta.com.git`
+- `https://github.com/abhishekgupta1704/abhishekgupta.com.git`
 
 HTTPS push:
 
@@ -29,7 +29,7 @@ git init
 git add .
 git commit -m "Initial portfolio site"
 git branch -M main
-git remote add origin https://github.com/abhishekgupta1704-code/abhishekgupta.com.git
+git remote add origin https://github.com/abhishekgupta1704/abhishekgupta.com.git
 git push -u origin main
 ```
 
@@ -40,12 +40,12 @@ git init
 git add .
 git commit -m "Initial portfolio site"
 git branch -M main
-git remote add origin git@github.com:abhishekgupta1704-code/abhishekgupta.com.git
+git remote add origin git@github.com:abhishekgupta1704/abhishekgupta.com.git
 git push -u origin main
 ```
 
 GitHub account details:
-- Username: `abhishekgupta1704-code`
+- Username: `abhishekgupta1704`
 - Email: `abhishekgupta1704@gmail.com`
 
 ## Cloudflare Pages setup
@@ -54,7 +54,7 @@ In Cloudflare Dashboard:
 
 1. Go to `Workers & Pages` > `Create` > `Pages` > `Connect to Git`
 2. Authorize GitHub if needed
-3. Select `abhishekgupta1704-code/abhishekgupta.com`
+3. Select `abhishekgupta1704/abhishekgupta.com`
 4. Configure the build:
    - Project name: `abhishekgupta`
    - Production branch: `main`
