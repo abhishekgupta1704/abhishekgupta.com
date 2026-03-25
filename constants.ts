@@ -123,9 +123,9 @@ export const FILMOGRAPHY: FilmographyGroup[] = [
     credits: [
       { title: 'Yuva Sapno Ka Safar', year: '2025', format: 'TV Series', credit: 'Editor', status: 'Released' },
       { title: 'First Act', year: '2023-2024', format: 'TV Series', credit: 'Editor', episodes: '2 episodes', note: 'Includes "Papa Kehte Hain"' },
-      { title: 'Love Storiyaan', year: '2024', format: 'TV Series', credit: 'Associate Editor', episodes: '1 episode' },
-      { title: 'Jubilee', year: '2023', format: 'TV Series', credit: 'Additional First Assistant Editor', episodes: '10 episodes' },
-      { title: 'Sacred Games', year: '2018-2019', format: 'TV Series', credit: 'Assistant Editor', episodes: '16 episodes' }
+      { title: 'Love Storiyaan', year: '2024', format: 'TV Series', credit: 'Associate Editor', episodes: '1 episode', status: 'Released' },
+      { title: 'Jubilee', year: '2023', format: 'TV Series', credit: 'Additional First Assistant Editor', episodes: '10 episodes', status: 'Released' },
+      { title: 'Sacred Games', year: '2018-2019', format: 'TV Series', credit: 'Assistant Editor', episodes: '16 episodes', status: 'Released' }
     ]
   },
   {
@@ -143,7 +143,7 @@ export const FILMOGRAPHY: FilmographyGroup[] = [
       { title: 'AK vs AK', year: '2020', format: 'Feature Film', credit: 'Associate Editor', status: 'Released' },
       { title: 'Choked', year: '2020', format: 'Feature Film', credit: 'Assistant Editor', status: 'Released' },
       { title: 'Barot House', year: '2019', format: 'Feature Film', credit: 'Editor', status: 'Released' },
-      { title: 'Gurgaon', year: '2017', format: 'Feature Film', credit: 'Additional Editor', note: 'Boys Of Gudgaawaan - Ayyash Chore' },
+      { title: 'Gurgaon', year: '2017', format: 'Feature Film', credit: 'Additional Editor', note: 'Boys Of Gudgaawaan - Ayyash Chore', status: 'Released' },
       { title: 'Hanuman Da\' Damdaar', year: '2017', format: 'Feature Film', credit: 'Editor: R.A.T Films', status: 'Released' }
     ]
   },

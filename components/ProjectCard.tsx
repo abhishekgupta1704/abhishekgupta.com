@@ -10,6 +10,7 @@ interface ProjectCardProps {
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [offsetY, setOffsetY] = useState(0);
+  const hasPoster = Boolean(project.posterUrl);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,11 +35,29 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         className="absolute inset-0 w-full h-[120%] -top-[10%] transition-transform duration-700 ease-out group-hover:scale-105"
         style={{ transform: `translateY(${offsetY}px)` }}
       >
-        <img 
-          src={project.posterUrl} 
-          alt={project.title}
-          className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-40 group-hover:grayscale-0 transition-all duration-700"
-        />
+        {hasPoster ? (
+          <img 
+            src={project.posterUrl} 
+            alt={project.title}
+            className="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-40 group-hover:grayscale-0 transition-all duration-700"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.2),transparent_42%),linear-gradient(160deg,#1a1a1a_0%,#090909_58%,#111827_100%)] px-8 text-center">
+            <div>
+              <div className="mb-5 text-[9px] uppercase tracking-[0.55em] text-amber-400/70">
+                Poster Placeholder
+              </div>
+              <div className="font-serif text-4xl font-bold tracking-tight text-white">
+                {project.placeholderLabel ?? project.title}
+              </div>
+              {project.format && (
+                <div className="mt-4 text-[11px] uppercase tracking-[0.45em] text-white/35">
+                  {project.format}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
       
       {/* Cinematic Overlay */}

@@ -8,7 +8,7 @@ export interface Award {
 export interface Project {
   id: string;
   title: string;
-  category: 'Shorts' | 'Series';
+  category: 'Shorts' | 'Series' | 'Features';
   year?: string;
   format?: string;
   credit?: string;
@@ -16,9 +16,10 @@ export interface Project {
   synopsis: string;
   awards?: Award[];
   trailerUrl?: string;
-  posterUrl: string;
+  posterUrl?: string;
   platforms?: string[];
   imdbUrl?: string;
+  placeholderLabel?: string;
 }
 
 export interface FilmographyCredit {

@@ -2,13 +2,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ProjectCard } from './components/ProjectCard';
 import { BIO, FILMOGRAPHY, PROJECTS } from './constants';
+import { Project } from './types';
 import { Menu, X, ArrowRight, ArrowDown, Instagram, Linkedin, Mail, Facebook, Film } from 'lucide-react';
 
 const App: React.FC = () => {
+  const filmographyPreviewCount = 6;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [scrollY, setScrollY] = useState(0);
+  const [expandedFilmographyGroups, setExpandedFilmographyGroups] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +57,22 @@ const App: React.FC = () => {
 
   const shorts = PROJECTS.filter(p => p.category === 'Shorts');
   const series = PROJECTS.filter(p => p.category === 'Series');
+  const postersByTitle = new Map(PROJECTS.map((project) => [project.title.toLowerCase(), project.posterUrl]));
+  const filmographyProjects = FILMOGRAPHY.map((group) => ({
+    ...group,
+    projects: group.credits.map<Project>((credit) => ({
+      id: `${group.title}-${credit.title}-${credit.year}`.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      title: credit.title.toUpperCase(),
+      category: credit.format.includes('TV Series') ? 'Series' : credit.format.includes('Feature') ? 'Features' : 'Shorts',
+      year: credit.year,
+      format: credit.format,
+      credit: credit.credit,
+      episodes: credit.episodes,
+      synopsis: [credit.status, credit.note].filter(Boolean).join(' • ') || 'Verified credit from IMDb.',
+      posterUrl: postersByTitle.get(credit.title.toLowerCase()),
+      placeholderLabel: credit.title,
+    })),
+  }));
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 selection:bg-amber-500 selection:text-black overflow-x-hidden">
@@ -252,55 +271,41 @@ const App: React.FC = () => {
           IMDb
         </div>
 
-        <div className="relative z-10 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <div className="max-w-3xl">
-            <span className="text-amber-500 text-[10px] uppercase tracking-[0.5em] font-black mb-4 block">Verified Credits</span>
-            <h2 className="text-5xl md:text-7xl font-serif font-bold tracking-tight mb-4">Filmography_</h2>
-            <p className="text-neutral-500 text-lg italic font-light">
-              A broader credit roll pulled from the IMDb profile, spanning series, features, shorts, and current productions.
-            </p>
-          </div>
+        <div className="relative z-10 space-y-20">
+          {filmographyProjects.map((group) => (
+            <article key={group.title}>
+              <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <span className="text-amber-500 text-[9px] uppercase tracking-[0.4em] font-black mb-3 block">{group.eyebrow}</span>
+                  <h3 className="text-3xl md:text-5xl font-serif font-bold tracking-tight text-white">{group.title}</h3>
+                </div>
+                <p className="max-w-xl text-sm md:text-base text-neutral-500 leading-relaxed">
+                  A compact poster-wall version of the IMDb credits, using real artwork where available and placeholders for the rest.
+                </p>
+              </div>
 
-          <a
-            href="https://www.imdb.com/name/nm9967492/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest border border-white/10 bg-white/5 px-6 py-4 rounded-full hover:border-amber-500/40 hover:text-amber-300 transition-colors"
-          >
-            <Film size={14} /> Open IMDb Profile <ArrowRight size={14} />
-          </a>
-        </div>
-
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {FILMOGRAPHY.map((group) => (
-            <article key={group.title} className="rounded-3xl border border-white/8 bg-white/[0.03] backdrop-blur-sm p-8 shadow-2xl">
-              <span className="text-amber-500 text-[9px] uppercase tracking-[0.4em] font-black mb-4 block">{group.eyebrow}</span>
-              <h3 className="text-3xl font-serif font-bold tracking-tight text-white mb-8">{group.title}</h3>
-
-              <div className="space-y-5">
-                {group.credits.map((credit) => (
-                  <div key={`${group.title}-${credit.title}-${credit.year}`} className="border-t border-white/8 pt-5 first:border-t-0 first:pt-0">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h4 className="text-lg font-serif text-white tracking-tight">{credit.title}</h4>
-                        <p className="mt-2 text-[11px] uppercase tracking-[0.28em] text-neutral-500">
-                          {credit.format} • {credit.credit}
-                          {credit.episodes ? ` • ${credit.episodes}` : ''}
-                        </p>
-                      </div>
-                      <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 whitespace-nowrap">{credit.year}</span>
-                    </div>
-
-                    {(credit.status || credit.note) && (
-                      <p className="mt-3 text-sm text-neutral-400 leading-relaxed">
-                        {credit.status ? <span className="text-neutral-200">{credit.status}</span> : null}
-                        {credit.status && credit.note ? ' • ' : ''}
-                        {credit.note ?? ''}
-                      </p>
-                    )}
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+                {(expandedFilmographyGroups[group.title] ? group.projects : group.projects.slice(0, filmographyPreviewCount)).map((project) => (
+                  <ProjectCard key={project.id} project={project} />
                 ))}
               </div>
+
+              {group.projects.length > filmographyPreviewCount && !expandedFilmographyGroups[group.title] && (
+                <div className="mt-10 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExpandedFilmographyGroups((current) => ({
+                        ...current,
+                        [group.title]: true,
+                      }))
+                    }
+                    className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.35em] border border-white/10 bg-white/5 px-8 py-4 rounded-full hover:border-amber-500/40 hover:text-amber-300 transition-colors"
+                  >
+                    Load More <ArrowDown size={14} />
+                  </button>
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -310,16 +315,11 @@ const App: React.FC = () => {
       <section id="bio" className="relative py-48 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-20 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center relative z-10">
           <div className="relative aspect-[4/5] overflow-hidden rounded-lg group">
-            <div 
-              className="w-full h-[120%] absolute -top-[10%]"
-              style={{ transform: `translateY(${(scrollY - 2500) * 0.05}px)` }}
-            >
-              <img 
-                src="/film-posters/2025,Umbral,ShortFilm.webp" 
-                className="w-full h-full object-cover grayscale opacity-70 group-hover:opacity-90 transition-opacity duration-700"
-                alt="Abhishek Gupta portrait"
-              />
-            </div>
+            <img
+              src="/AbhishekProfilePicture.webp"
+              className="w-full h-full object-cover grayscale opacity-75 group-hover:opacity-95 transition-opacity duration-700"
+              alt="Abhishek Gupta portrait"
+            />
             <div className="absolute inset-0 border border-white/10 m-4 pointer-events-none" />
           </div>
           
